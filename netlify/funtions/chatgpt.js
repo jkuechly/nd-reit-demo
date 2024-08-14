@@ -6,7 +6,11 @@ exports.handler = async function(event, context) {
   }
 
   const { text } = JSON.parse(event.body);
-  const openaiApiKey = process.env.OPENAI_API_KEY;
+
+  // Check if the API key is set
+  if (!process.env.OPENAI_API_KEY) {
+    return { statusCode: 500, body: JSON.stringify({error: 'OpenAI API key is not set'}) };
+  }
 
   try {
     const response = await axios.post(
@@ -20,7 +24,7 @@ exports.handler = async function(event, context) {
       },
       {
         headers: {
-          'Authorization': `Bearer ${openaiApiKey}`,
+          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
           'Content-Type': 'application/json'
         }
       }
