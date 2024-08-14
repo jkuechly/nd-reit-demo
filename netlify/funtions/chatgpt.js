@@ -20,7 +20,7 @@ exports.handler = async function(event, context) {
       },
       {
         headers: {
-          'Authorization': `Bearer ${sk-proj-ddfZ7m7rziQGwjMziUGuT3BlbkFJShE1Kd8rhl979F4LuEVv}`,
+          'Authorization': `Bearer ${openaiApiKey}`,
           'Content-Type': 'application/json'
         }
       }
