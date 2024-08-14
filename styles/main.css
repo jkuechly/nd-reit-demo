@@ -9,3 +9,15 @@ body {
 h1 {
     color: #333;
 }
+
+pdf-upload {
+    display: block;
+    margin: 20px 0;
+}
+
+#results-dashboard {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
