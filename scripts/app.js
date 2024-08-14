@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Parsed text in main app:", parsedText);
         
         try {
-            const response = await fetch('/api/chatgpt', {
+            const response = await fetch('/.netlify/functions/chatgpt', {
                 method: 'POST',
                 body: JSON.stringify({ text: parsedText }),
                 headers: { 'Content-Type': 'application/json' }
@@ -28,10 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayResults(data) {
         resultsDashboard.innerHTML = `
             <h2>Parsed Lease Data:</h2>
-            <p><strong>Tenant:</strong> ${data.tenant}</p>
-            <p><strong>Landlord:</strong> ${data.landlord}</p>
-            <p><strong>Lease Term:</strong> ${data.lease_term}</p>
-            <p><strong>Rent:</strong> ${data.rent}</p>
+            <pre>${data}</pre>
         `;
         resultsDashboard.style.display = 'block';
     }
