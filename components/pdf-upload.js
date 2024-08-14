@@ -4,8 +4,22 @@ class PdfUpload extends HTMLElement {
         this.innerHTML = `
             <input type="file" id="pdf-file" accept="application/pdf">
             <button id="upload-button">Upload and Parse</button>
+            <div id="file-name"></div>
         `;
+        this.addEventListener('change', this.updateFileName);
         this.addEventListener('click', this.handleUpload);
+    }
+
+    updateFileName(event) {
+        if (event.target.id === 'pdf-file') {
+            const fileNameDiv = this.querySelector('#file-name');
+            const file = event.target.files[0];
+            if (file) {
+                fileNameDiv.textContent = `Selected file: ${file.name}`;
+            } else {
+                fileNameDiv.textContent = '';
+            }
+        }
     }
 
     async handleUpload(event) {
@@ -13,17 +27,16 @@ class PdfUpload extends HTMLElement {
             const fileInput = this.querySelector('#pdf-file');
             const file = fileInput.files[0];
             if (file) {
-                console.log("File selected:", file.name);
+                this.dispatchEvent(new CustomEvent('status-update', { detail: 'Parsing PDF...' }));
                 try {
                     const text = await this.parsePdf(file);
-                    console.log("Parsed text:", text);
-                    // Here we'll add the logic to send to ChatGPT
                     this.dispatchEvent(new CustomEvent('pdf-parsed', { detail: text }));
                 } catch (error) {
                     console.error("Error parsing PDF:", error);
+                    this.dispatchEvent(new CustomEvent('status-update', { detail: 'Error parsing PDF' }));
                 }
             } else {
-                console.log("No file selected");
+                this.dispatchEvent(new CustomEvent('status-update', { detail: 'No file selected' }));
             }
         }
     }
