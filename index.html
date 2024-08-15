@@ -3,57 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Dashboard</title>
+    <title>Commercial Lease Parser</title>
     <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
 </head>
 <body>
-    <div class="dashboard">
-        <header>
-            <h1>Dashboard - Home/ (property address)</h1>
-            <div class="header-actions">
-                <button>Search</button>
-                <button>Profile, settings, etc</button>
-            </div>
-        </header>
-        <nav>
-            <ul>
-                <li><button></button></li>
-                <li><button></button></li>
-                <li><button></button></li>
-            </ul>
-        </nav>
-        <main>
-            <div class="property-info">
-                <h2>Property Address</h2>
-                <p>Square Footage</p>
-            </div>
-            <div class="lessee-info">
-                <h2>Lessee Name</h2>
-                <p>Lessee Mailing Address</p>
-            </div>
-            <div class="lease-terms">
-                <h2>Lease Terms:</h2>
-                <ul>
-                    <li>Commencement date</li>
-                    <li>Expiration date</li>
-                    <li>Rent payment schedule</li>
-                    <li>Rent Due Date (i.e first of month) + late fee</li>
-                    <li>Deposit</li>
-                </ul>
-            </div>
-            <div class="next-due">
-                <h2>Next amount due / date</h2>
-            </div>
-            <div class="other-terms">
-                <h2>Other Terms:</h2>
-                <ul>
-                    <li>Parking</li>
-                    <li>Maintenance/ HVAC/CAM</li>
-                    <li>Insurance requirements</li>
-                    <li>Renewal</li>
-                </ul>
-            </div>
-        </main>
-    </div>
+    <h1>Commercial Lease Parser</h1>
+    <pdf-upload></pdf-upload>
+    <div id="status-message"></div>
+    <div id="results-dashboard"></div>
+
+    <script src="components/pdf-upload.js"></script>
+    <script src="scripts/app.js"></script>
 </body>
 </html>
