@@ -53,6 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 throw new Error(data.error || `HTTP error! status: ${response.status}`);
             }
     
+            if (data.error) {
+                throw new Error(data.error);
+            }
+    
             statusMessage.textContent = 'Status: Extraction complete! Redirecting to dashboard...';
             
             localStorage.setItem('parsedLeaseData', JSON.stringify(data.parsed_data));
@@ -63,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Error:', error);
             statusMessage.textContent = `Status: Error - ${error.message}`;
+            if (error.details) {
+                console.error('Error details:', error.details);
+            }
             extractButton.disabled = false;
         }
     });
