@@ -1,8 +1,11 @@
 :root {
     --bg-color: #1a1a1a;
     --panel-color: #2a2a2a;
+    --panel-highlight: #3a3a3a;
     --text-color: #e0e0e0;
-    --border-color: #3a3a3a;
+    --text-muted: #a0a0a0;
+    --border-color: #444;
+    --accent-color: #4a90e2;
 }
 
 body, html {
@@ -11,31 +14,42 @@ body, html {
     font-family: Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    line-height: 1.6;
     height: 100%;
 }
 
 .dashboard {
     display: grid;
     grid-template-rows: auto 1fr;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 header {
+    background-color: var(--panel-color);
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
-    background-color: var(--panel-color);
     border-bottom: 1px solid var(--border-color);
 }
 
-h1 {
-    font-size: 1.2em;
+h1, h2, h3 {
     margin: 0;
+    color: var(--accent-color);
 }
 
-.header-actions button {
-    margin-left: 10px;
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .content {
@@ -58,7 +72,7 @@ nav button {
     width: 40px;
     height: 40px;
     margin: 10px;
-    background-color: var(--border-color);
+    background-color: var(--panel-highlight);
     border: none;
     border-radius: 5px;
 }
@@ -70,9 +84,8 @@ main {
 /* Dashboard Grid */
 .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
 }
 
 .dashboard-grid > div {
@@ -98,9 +111,20 @@ main {
     grid-row: 3;
 }
 
-h2 {
-    font-size: 1.1em;
-    margin-top: 0;
+.sub-panel {
+    background-color: var(--panel-highlight);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.schedule-list {
+    margin-left: 1rem;
+    color: var(--text-muted);
+}
+
+strong {
+    color: var(--accent-color);
 }
 
 ul {
@@ -109,41 +133,16 @@ ul {
 }
 
 button {
-    background-color: var(--border-color);
+    background-color: var(--panel-highlight);
     color: var(--text-color);
     border: none;
-    padding: 5px 10px;
+    padding: 0.5rem 1rem;
     border-radius: 3px;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #4a4a4a;
-}
-
-/* Styles for index.html */
-.upload-section {
-    background-color: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-#status-message {
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: var(--bg-color);
-    border-radius: 5px;
-    font-size: 0.9em;
-    color: #a0a0a0; /* Light gray color */
-}
-
-#results-dashboard {
-    background-color: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 20px;
+    background-color: var(--accent-color);
 }
 
 /* Styles for index.html */
@@ -178,46 +177,9 @@ button:hover {
     border-radius: 5px;
 }
 
-#pdf-viewer {
-    height: 500px;
-    overflow-y: auto;
-    background-color: var(--bg-color);
-    border-radius: 5px;
-}
-
-/* Ensure content fills the screen */
-.dashboard {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    height: 100vh;
-}
-
-.content {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-}
-
-#extract-button {
-    display: block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 1.1em;
-    background-color: #3a3a3a;
-    color: #e0e0e0;
-    border: 1px solid #4a4a4a;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-#extract-button:hover:not(:disabled) {
-    background-color: #4a4a4a;
-    border-color: #5a5a5a;
-}
-
-#extract-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+#status-message {
+    font-size: 0.9em;
+    color: var(--text-muted);
 }
 
 #pdf-viewer {
@@ -231,4 +193,26 @@ button:hover {
     display: block;
     margin: 10px auto;
     border: 1px solid var(--border-color);
+}
+
+#extract-button {
+    display: block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: var(--panel-highlight);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#extract-button:hover:not(:disabled) {
+    background-color: var(--accent-color);
+}
+
+#extract-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }

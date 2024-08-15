@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const rentScheduleElement = document.getElementById('rentPaymentSchedule');
         if (Array.isArray(leaseData.rentPaymentSchedule)) {
             rentScheduleElement.innerHTML = leaseData.rentPaymentSchedule.map(schedule => 
-                `${schedule.start} to ${schedule.end}: ${schedule.payment}`
-            ).join('<br>');
+                `<p>${schedule.start} to ${schedule.end}: <strong>${schedule.payment}</strong></p>`
+            ).join('');
         } else {
             rentScheduleElement.textContent = leaseData.rentPaymentSchedule || 'Not specified';
         }
@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const parkingElement = document.getElementById('parking');
         if (typeof leaseData.parking === 'object' && leaseData.parking !== null) {
             parkingElement.innerHTML = `
-                Available: ${leaseData.parking.available || 'Not specified'}<br>
-                Spaces: ${leaseData.parking.spaces || 'Not specified'}<br>
-                Fee: ${leaseData.parking.fee || 'Not specified'}
+                <p><strong>Available:</strong> ${leaseData.parking.available || 'Not specified'}</p>
+                <p><strong>Spaces:</strong> ${leaseData.parking.spaces || 'Not specified'}</p>
+                <p><strong>Fee:</strong> ${leaseData.parking.fee || 'Not specified'}</p>
             `;
         } else {
             parkingElement.textContent = leaseData.parking || 'Not specified';
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const maintenanceElement = document.getElementById('maintenanceHVACCAM');
         if (typeof leaseData.maintenanceHVACCAM === 'object' && leaseData.maintenanceHVACCAM !== null) {
             maintenanceElement.innerHTML = `
-                Common Area Maintenance: ${leaseData.maintenanceHVACCAM.commonAreaMaintenance || 'Not specified'}<br>
-                Real Estate Taxes: ${leaseData.maintenanceHVACCAM.realEstateTaxes || 'Not specified'}<br>
-                Insurance: ${leaseData.maintenanceHVACCAM.insurance ? 
+                <p><strong>Common Area Maintenance:</strong> ${leaseData.maintenanceHVACCAM.commonAreaMaintenance || 'Not specified'}</p>
+                <p><strong>Real Estate Taxes:</strong> ${leaseData.maintenanceHVACCAM.realEstateTaxes || 'Not specified'}</p>
+                <p><strong>Insurance:</strong> ${leaseData.maintenanceHVACCAM.insurance ? 
                     (leaseData.maintenanceHVACCAM.insurance.requirement || 'Required') : 
-                    'Not specified'}
+                    'Not specified'}</p>
             `;
         } else {
             maintenanceElement.textContent = leaseData.maintenanceHVACCAM || 'Not specified';

@@ -24,35 +24,48 @@
                 </ul>
             </nav>
             <main class="dashboard-grid">
-                <div class="property-info">
+                <div class="info-panel property-info">
                     <h2>Property Information</h2>
-                    <p id="propertyAddress"></p>
-                    <p id="squareFootage"></p>
+                    <p><strong>Address:</strong> <span id="propertyAddress"></span></p>
+                    <p><strong>Square Footage:</strong> <span id="squareFootage"></span></p>
                 </div>
-                <div class="lessee-info">
+                <div class="info-panel lessee-info">
                     <h2>Lessee Information</h2>
-                    <p id="lesseeName"></p>
-                    <p id="lesseeMailingAddress"></p>
+                    <p><strong>Name:</strong> <span id="lesseeName"></span></p>
+                    <p><strong>Mailing Address:</strong> <span id="lesseeMailingAddress"></span></p>
                 </div>
-                <div class="lease-terms">
+                <div class="info-panel lease-terms">
                     <h2>Lease Terms</h2>
-                    <p>Commencement Date: <span id="commencementDate"></span></p>
-                    <p>Expiration Date: <span id="expirationDate"></span></p>
-                    <p>Rent Payment Schedule: <span id="rentPaymentSchedule"></span></p>
-                    <p>Rent Due Date: <span id="rentDueDate"></span></p>
-                    <p>Deposit: <span id="deposit"></span></p>
+                    <p><strong>Commencement Date:</strong> <span id="commencementDate"></span></p>
+                    <p><strong>Expiration Date:</strong> <span id="expirationDate"></span></p>
+                    <p><strong>Rent Payment Schedule:</strong></p>
+                    <div id="rentPaymentSchedule" class="schedule-list"></div>
+                    <p><strong>Rent Due Date:</strong> <span id="rentDueDate"></span></p>
+                    <p><strong>Deposit:</strong> <span id="deposit"></span></p>
                 </div>
-                <div class="next-due">
+                <div class="info-panel next-due">
                     <h2>Next Payment Due</h2>
-                    <p>Amount: <span id="nextMonthlyRentAmount"></span></p>
-                    <p>Date: <span id="nextRentDueDate"></span></p>
+                    <p><strong>Amount:</strong> <span id="nextMonthlyRentAmount"></span></p>
+                    <p><strong>Date:</strong> <span id="nextRentDueDate"></span></p>
                 </div>
-                <div class="other-terms">
+                <div class="info-panel other-terms">
                     <h2>Other Terms</h2>
-                    <p>Parking: <span id="parking"></span></p>
-                    <p>Maintenance/HVAC/CAM: <span id="maintenanceHVACCAM"></span></p>
-                    <p>Insurance Requirements: <span id="insuranceRequirements"></span></p>
-                    <p>Renewal: <span id="renewal"></span></p>
+                    <div class="sub-panel">
+                        <h3>Parking</h3>
+                        <div id="parking"></div>
+                    </div>
+                    <div class="sub-panel">
+                        <h3>Maintenance/HVAC/CAM</h3>
+                        <div id="maintenanceHVACCAM"></div>
+                    </div>
+                    <div class="sub-panel">
+                        <h3>Insurance Requirements</h3>
+                        <p id="insuranceRequirements"></p>
+                    </div>
+                    <div class="sub-panel">
+                        <h3>Renewal</h3>
+                        <p id="renewal"></p>
+                    </div>
                 </div>
             </main>
         </div>
