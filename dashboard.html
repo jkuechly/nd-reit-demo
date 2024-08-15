@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Dashboard</title>
+    <title>Lease Dashboard</title>
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <div class="dashboard">
         <header>
-            <h1>Dashboard - Home/ (property address)</h1>
+            <h1>Dashboard - Lease Information</h1>
             <div class="header-actions">
-                <button>Search</button>
                 <button>Profile, settings, etc</button>
             </div>
         </header>
@@ -21,34 +20,43 @@
                     <li><button></button></li>
                     <li><button></button></li>
                     <li><button></button></li>
+                    <li><button></button></li>
                 </ul>
             </nav>
             <main class="dashboard-grid">
                 <div class="property-info">
-                    <h2>Property Address</h2>
-                    <p id="square-footage">Square Footage</p>
+                    <h2>Property Information</h2>
+                    <p id="propertyAddress"></p>
+                    <p id="squareFootage"></p>
                 </div>
                 <div class="lessee-info">
-                    <h2>Lessee Name</h2>
-                    <p id="lessee-address">Lessee Mailing Address</p>
+                    <h2>Lessee Information</h2>
+                    <p id="lesseeName"></p>
+                    <p id="lesseeMailingAddress"></p>
                 </div>
                 <div class="lease-terms">
-                    <h2>Lease Terms:</h2>
-                    <ul id="lease-terms-list">
-                        <li>Commencement date</li>
-                        <li>Expiration date</li>
-                        <li>Rent payment schedule</li>
-                        <li>Rent Due Date (i.e first of month) + late fee</li>
-                        <li>Deposit</li>
-                    </ul>
+                    <h2>Lease Terms</h2>
+                    <p>Commencement Date: <span id="commencementDate"></span></p>
+                    <p>Expiration Date: <span id="expirationDate"></span></p>
+                    <p>Rent Payment Schedule: <span id="rentPaymentSchedule"></span></p>
+                    <p>Rent Due Date: <span id="rentDueDate"></span></p>
+                    <p>Deposit: <span id="deposit"></span></p>
                 </div>
                 <div class="next-due">
-                    <h2>Next amount due / date</h2>
-                    <p id="next-payment"></p>
+                    <h2>Next Payment Due</h2>
+                    <p>Amount: <span id="nextMonthlyRentAmount"></span></p>
+                    <p>Date: <span id="nextRentDueDate"></span></p>
                 </div>
                 <div class="other-terms">
-                    <h2>Other Terms:</h2>
-                    <ul id="other-terms-list">
-                        <li>Parking</li>
-                        <li>Maintenance/ HVAC/CAM</li>
-                        <li>Insurance requirements</li>
+                    <h2>Other Terms</h2>
+                    <p>Parking: <span id="parking"></span></p>
+                    <p>Maintenance/HVAC/CAM: <span id="maintenanceHVACCAM"></span></p>
+                    <p>Insurance Requirements: <span id="insuranceRequirements"></span></p>
+                    <p>Renewal: <span id="renewal"></span></p>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>

@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     statusMessage.textContent = 'Status: Waiting for file';
 
-
     // And update the message when processing the file
     fileInput.addEventListener('change', async (event) => {
         const file = event.target.files[0];

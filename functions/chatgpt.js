@@ -2,14 +2,13 @@ const axios = require('axios');
 
 exports.handler = async function(event, context) {
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: 'Method Not Allowed' };
+    return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
   }
 
   const { text } = JSON.parse(event.body);
 
-  // Check if the API key is set
   if (!process.env.OPENAI_API_KEY) {
-    return { statusCode: 500, body: JSON.stringify({error: 'OpenAI API key is not set'}) };
+    return { statusCode: 500, body: JSON.stringify({ error: 'OpenAI API key is not set' }) };
   }
 
   try {
@@ -18,8 +17,8 @@ exports.handler = async function(event, context) {
       {
         model: "gpt-3.5-turbo",
         messages: [
-          {role: "system", content: "You are a helpful assistant that parses commercial lease information."},
-          {role: "user", content: `Parse the following lease text and extract key information such as tenant, landlord, lease term, and rent: ${text}`}
+          {role: "system", content: "You are a helpful assistant that extracts key information from commercial lease documents. Your output should be a valid JSON object with specific keys."},
+          {role: "user", content: `Extract the following information from this lease document and format it as a JSON object with these exact keys: commencementDate, expirationDate, rentPaymentSchedule, rentDueDate, deposit, propertyAddress, squareFootage, lesseeName, lesseeMailingAddress, parking, maintenanceHVACCAM, insuranceRequirements, renewal, nextMonthlyRentAmount, nextRentDueDate. If any information is not found, use "Not specified" as the value. Here's the lease text:\n\n${text}`}
         ]
       },
       {
@@ -30,7 +29,7 @@ exports.handler = async function(event, context) {
       }
     );
 
-    const parsedData = response.data.choices[0].message.content;
+    const parsedData = JSON.parse(response.data.choices[0].message.content);
 
     return {
       statusCode: 200,
@@ -40,7 +39,10 @@ exports.handler = async function(event, context) {
     console.error('Error:', error.response ? error.response.data : error.message);
     return { 
       statusCode: 500, 
-      body: JSON.stringify({error: 'Failed to process the lease'})
+      body: JSON.stringify({
+        error: 'Failed to process the lease',
+        details: error.response ? error.response.data : error.message
+      })
     };
   }
 };
