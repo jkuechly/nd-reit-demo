@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', () => {
         fileInput.click();
     });
 
+    statusMessage.textContent = 'Status: Waiting for file';
+
+
+    // And update the message when processing the file
     fileInput.addEventListener('change', async (event) => {
         const file = event.target.files[0];
         if (file) {
@@ -34,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     extractButton.addEventListener('click', async () => {
-        statusMessage.textContent = 'Status: Sending to ChatGPT for analysis...';
+        statusMessage.textContent = 'Status: Initiating AI data extraction process...';
         extractButton.disabled = true;
         
         try {
@@ -45,12 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             const data = await response.json();
-
+    
             if (!response.ok) {
                 throw new Error(data.error || `HTTP error! status: ${response.status}`);
             }
-
-            statusMessage.textContent = 'Status: Analysis complete! Redirecting to dashboard...';
+    
+            statusMessage.textContent = 'Status: Extraction complete! Redirecting to dashboard...';
             
             localStorage.setItem('parsedLeaseData', JSON.stringify(data.parsed_data));
             

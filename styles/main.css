@@ -132,9 +132,11 @@ button:hover {
 
 #status-message {
     margin-top: 10px;
-    padding: 10px;
+    padding: 5px 10px;
     background-color: var(--bg-color);
     border-radius: 5px;
+    font-size: 0.9em;
+    color: #a0a0a0; /* Light gray color */
 }
 
 #results-dashboard {
@@ -197,7 +199,7 @@ button:hover {
 
 #extract-button {
     display: block;
-    margin-top: 15px;
+    margin-top: 10px;
     padding: 10px 20px;
     font-size: 1.1em;
     background-color: #3a3a3a;
