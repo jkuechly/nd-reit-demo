@@ -36,13 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const parkingElement = document.getElementById('parking');
         if (typeof leaseData.parking === 'object' && leaseData.parking !== null) {
             parkingElement.innerHTML = `
-                <p><strong>Available:</strong> ${leaseData.parking.available || 'Not specified'}</p>
                 <p><strong>Spaces:</strong> ${leaseData.parking.spaces || 'Not specified'}</p>
-                <p><strong>Fee:</strong> ${leaseData.parking.fee || 'Not specified'}</p>
             `;
         } else {
             parkingElement.textContent = leaseData.parking || 'Not specified';
         }
+
 
         // Maintenance/HVAC/CAM
         const maintenanceElement = document.getElementById('maintenanceHVACCAM');

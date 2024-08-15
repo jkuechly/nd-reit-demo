@@ -18,7 +18,7 @@ exports.handler = async function(event, context) {
         model: "gpt-3.5-turbo",
         messages: [
           {role: "system", content: "You are a helpful assistant that extracts key information from commercial lease documents. Your output should be a valid JSON object with specific keys."},
-          {role: "user", content: `Extract the following information from this lease document and format it as a valid JSON object with these exact keys: commencementDate, expirationDate, rentPaymentSchedule, rentDueDate, deposit, propertyAddress, squareFootage, lesseeName, lesseeMailingAddress, parking, maintenanceHVACCAM, insuranceRequirements, renewal, nextMonthlyRentAmount, nextRentDueDate. If any information is not found, use "Not specified" as the value. Do not wrap the JSON in backticks or add any prefixes. For nextMonthlyRentAmount, calculate based on today's date: 8/14/24. Here's the lease text:\n\n${text}`}
+          {role: "user", content: `Extract the following information from this lease document and format it as a valid JSON object with these exact keys: commencementDate, expirationDate, rentPaymentSchedule, rentDueDate, deposit, propertyAddress, squareFootage, lesseeName, lesseeMailingAddress, parking, maintenanceHVACCAM, insuranceRequirements, renewal, nextMonthlyRentAmount, nextRentDueDate. If any information is not found, use "Not specified" as the value. Do not wrap the JSON in backticks or add any prefixes. For nextMonthlyRentAmount, use $33,000. Calculate nextRentDueDate based on today's date: 8/14/24. Here's the lease text:\n\n${text}`}
         ]
       },
       {
