@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileName = document.getElementById('file-name');
     const statusMessage = document.getElementById('status-message');
     const pdfViewer = document.getElementById('pdf-viewer');
+    const extractButton = document.getElementById('extract-button');
+
+    let pdfText = '';
 
     uploadButton.addEventListener('click', () => {
         fileInput.click();
@@ -14,37 +17,50 @@ document.addEventListener('DOMContentLoaded', () => {
         if (file) {
             fileName.textContent = file.name;
             statusMessage.textContent = 'Status: Processing file...';
+            extractButton.disabled = true;
             
             try {
-                const text = await parsePdf(file);
-                statusMessage.textContent = 'Status: Sending to ChatGPT for analysis...';
+                pdfText = await parsePdf(file);
+                statusMessage.textContent = 'Status: PDF processed. Ready for extraction.';
+                extractButton.disabled = false;
                 
-                const response = await fetch('/.netlify/functions/chatgpt', {
-                    method: 'POST',
-                    body: JSON.stringify({ text }),
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || `HTTP error! status: ${response.status}`);
-                }
-
-                statusMessage.textContent = 'Status: Analysis complete! Redirecting to dashboard...';
-                
-                localStorage.setItem('parsedLeaseData', JSON.stringify(data.parsed_data));
-                
-                setTimeout(() => {
-                    window.location.href = 'dashboard.html';
-                }, 1500);
+                // Display PDF preview
+                displayPdfPreview(file);
             } catch (error) {
                 console.error('Error:', error);
                 statusMessage.textContent = `Status: Error - ${error.message}`;
             }
+        }
+    });
 
-            // Display PDF preview
-            displayPdfPreview(file);
+    extractButton.addEventListener('click', async () => {
+        statusMessage.textContent = 'Status: Sending to ChatGPT for analysis...';
+        extractButton.disabled = true;
+        
+        try {
+            const response = await fetch('/.netlify/functions/chatgpt', {
+                method: 'POST',
+                body: JSON.stringify({ text: pdfText }),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || `HTTP error! status: ${response.status}`);
+            }
+
+            statusMessage.textContent = 'Status: Analysis complete! Redirecting to dashboard...';
+            
+            localStorage.setItem('parsedLeaseData', JSON.stringify(data.parsed_data));
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        } catch (error) {
+            console.error('Error:', error);
+            statusMessage.textContent = `Status: Error - ${error.message}`;
+            extractButton.disabled = false;
         }
     });
 
@@ -71,26 +87,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    function displayPdfPreview(file) {
+    async function displayPdfPreview(file) {
         const reader = new FileReader();
-        reader.onload = function(event) {
+        reader.onload = async function(event) {
             const typedarray = new Uint8Array(event.target.result);
-            pdfjsLib.getDocument(typedarray).promise.then(pdf => {
-                pdf.getPage(1).then(page => {
-                    const scale = 1.5;
-                    const viewport = page.getViewport({ scale });
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.height = viewport.height;
-                    canvas.width = viewport.width;
-                    pdfViewer.innerHTML = '';
-                    pdfViewer.appendChild(canvas);
-                    page.render({
-                        canvasContext: context,
-                        viewport: viewport
-                    });
-                });
-            });
+            const pdf = await pdfjsLib.getDocument(typedarray).promise;
+            pdfViewer.innerHTML = '';
+            
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                const page = await pdf.getPage(pageNum);
+                const scale = 1.5;
+                const viewport = page.getViewport({ scale });
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                pdfViewer.appendChild(canvas);
+                await page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                }).promise;
+            }
         };
         reader.readAsArrayBuffer(file);
     }

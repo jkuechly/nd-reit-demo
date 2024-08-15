@@ -194,3 +194,39 @@ button:hover {
     display: grid;
     grid-template-columns: 60px 1fr;
 }
+
+#extract-button {
+    display: block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    border: 1px solid #4a4a4a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#extract-button:hover:not(:disabled) {
+    background-color: #4a4a4a;
+    border-color: #5a5a5a;
+}
+
+#extract-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#pdf-viewer {
+    height: 500px;
+    overflow-y: auto;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+}
+
+#pdf-viewer canvas {
+    display: block;
+    margin: 10px auto;
+    border: 1px solid var(--border-color);
+}
