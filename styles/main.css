@@ -143,3 +143,54 @@ button:hover {
     border-radius: 5px;
     padding: 20px;
 }
+
+/* Styles for index.html */
+.upload-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.upload-section, .pdf-preview {
+    background-color: var(--panel-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.upload-section h2, .pdf-preview h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+#upload-button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#file-name, #status-message {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+}
+
+#pdf-viewer {
+    height: 500px;
+    overflow-y: auto;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+}
+
+/* Ensure content fills the screen */
+.dashboard {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100vh;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+}

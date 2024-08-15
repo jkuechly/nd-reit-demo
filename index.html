@@ -10,17 +10,35 @@
 <body>
     <div class="dashboard">
         <header>
-            <h1>Commercial Lease Parser</h1>
-        </header>
-        <main>
-            <div class="upload-section">
-                <pdf-upload></pdf-upload>
-                <div id="status-message"></div>
+            <h1>Dashboard - Home</h1>
+            <div class="header-actions">
+                <button>Profile, settings, etc</button>
             </div>
-            <div id="results-dashboard"></div>
-        </main>
+        </header>
+        <div class="content">
+            <nav>
+                <ul>
+                    <li><button></button></li>
+                    <li><button></button></li>
+                    <li><button></button></li>
+                    <li><button></button></li>
+                </ul>
+            </nav>
+            <main class="upload-grid">
+                <div class="upload-section">
+                    <h2>Commercial Lease - PDF Upload</h2>
+                    <input type="file" id="pdf-file" accept="application/pdf" style="display: none;">
+                    <button id="upload-button">Upload</button>
+                    <div id="file-name">No file selected</div>
+                    <div id="status-message">Status: waiting for file</div>
+                </div>
+                <div class="pdf-preview">
+                    <h2>PDF Preview</h2>
+                    <div id="pdf-viewer"></div>
+                </div>
+            </main>
+        </div>
     </div>
-    <script src="components/pdf-upload.js"></script>
     <script src="scripts/app.js"></script>
 </body>
 </html>
