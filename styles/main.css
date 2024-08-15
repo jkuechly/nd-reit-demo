@@ -11,12 +11,13 @@ body, html {
     font-family: Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
+    height: 100%;
 }
 
 .dashboard {
     display: grid;
     grid-template-rows: auto 1fr;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 header {
@@ -33,34 +34,40 @@ h1 {
     margin: 0;
 }
 
+.header-actions button {
+    margin-left: 10px;
+}
+
+.content {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+}
+
+nav {
+    background-color: var(--panel-color);
+    border-right: 1px solid var(--border-color);
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav button {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    background-color: var(--border-color);
+    border: none;
+    border-radius: 5px;
+}
+
 main {
     padding: 20px;
 }
 
-/* Styles for index.html */
-.upload-section {
-    background-color: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-#status-message {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: var(--bg-color);
-    border-radius: 5px;
-}
-
-#results-dashboard {
-    background-color: var(--panel-color);
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    padding: 20px;
-}
-
-/* Styles for dashboard.html */
+/* Dashboard Grid */
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -112,4 +119,27 @@ button {
 
 button:hover {
     background-color: #4a4a4a;
+}
+
+/* Styles for index.html */
+.upload-section {
+    background-color: var(--panel-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#status-message {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border-radius: 5px;
+}
+
+#results-dashboard {
+    background-color: var(--panel-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 20px;
 }
