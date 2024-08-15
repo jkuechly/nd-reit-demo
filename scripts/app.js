@@ -20,25 +20,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' }
             });
             
+            const data = await response.json();
+
             if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+                throw new Error(data.error || `HTTP error! status: ${response.status}`);
             }
 
-            const data = await response.json();
-            statusMessage.textContent = 'Analysis complete!';
-            displayResults(data.parsed_data);
+            statusMessage.textContent = 'Analysis complete! Redirecting to dashboard...';
+            
+            // Store the parsed data in localStorage
+            localStorage.setItem('parsedLeaseData', JSON.stringify(data.parsed_data));
+            
+            // Redirect to dashboard.html
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
         } catch (error) {
             console.error('Error:', error);
             statusMessage.textContent = `Error: ${error.message}`;
             resultsDashboard.innerHTML = `<p>Error: ${error.message}</p>`;
+            if (error.details) {
+                resultsDashboard.innerHTML += `<p>Details: ${JSON.stringify(error.details)}</p>`;
+            }
         }
     });
-
-    function displayResults(data) {
-        resultsDashboard.innerHTML = `
-            <h2>Parsed Lease Data:</h2>
-            <pre>${data}</pre>
-        `;
-        resultsDashboard.style.display = 'block';
-    }
 });
